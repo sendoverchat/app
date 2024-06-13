@@ -1,11 +1,15 @@
 from flask import Flask
+import json
+
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+# import routes
 from private.routes import routes
 routes(app)
 
-app.secret_key = 'c64f3b67-b6e2-4185-a58c-3540969e0c81'
+# config
+app.secret_key = json.load(open("config.json", "r"))["secret-key"]
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = "./static"
