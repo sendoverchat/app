@@ -6,6 +6,7 @@ def custom_template(
     title : str,
     description : str,
     styles : list,
+    is_navbar : bool = True,
     **context
 ):
     return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, **context)
@@ -17,7 +18,7 @@ def routes(app : Flask):
     @app.route("/")
     def index():
         
-        return custom_template("home.html", "SendOver - Home", description="", styles=["/static/css/home.css"])
+        return custom_template("pages/home.html", "SendOver - Home", description="", styles=["/static/css/home.css"])
 
     
     @app.errorhandler(404)
