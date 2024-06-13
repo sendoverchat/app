@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SendOver</title>
+
+    <meta name="title" content="{{title}}">
+    <meta name="description" content="{{description}}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="French">
+    <meta name="theme-color" content="#161b22">
+    <meta content="/static/assets/logo.png" property='og:image'>
+
+    <meta name="title" content="{{title}}">
+    <meta name="description" content="{{description}}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="French">
+
+    <meta content="{{title}}" property="og:site_name">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <link rel="alternate icon" class="js-site-favicon" type="image/png" href="/static/assets/logo.png">
+
+    <title>{{title}}</title>
+    {% for style in styles %}
+        <link rel="stylesheet" href="{{style}}">
+    {% endfor %}
 </head>
 <body>
-    {{test}}
+    {% include site_page %}
 </body>
 </html>
