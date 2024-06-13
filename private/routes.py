@@ -17,12 +17,8 @@ def custom_template(
     **context
 ):
     
-    cookie_theme = request.cookies.get("theme")
-    if cookie_theme == "black":
-        theme_black = True
-    else:
-        theme_black = False
-    return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, navbar_type=navbar_type, theme_black=theme_black, **context)
+    theme = request.cookies.get("theme")
+    return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, navbar_type=navbar_type, theme=theme, **context)
 
 
 
@@ -37,3 +33,9 @@ def routes(app : Flask):
     @app.errorhandler(404)
     def not_found(e):
         return render_template("./errors/404.html")
+    
+    @app.route("/test")
+    def test():
+        red = redirect("/")
+        red.set_cookie("theme", "dark")
+        return red
