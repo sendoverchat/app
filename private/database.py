@@ -8,4 +8,3 @@ connection_params = {
     'password': data["db_password"],
     'database': data['db_name']
 }
-
