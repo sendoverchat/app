@@ -1,12 +1,6 @@
 from flask import request, Flask, redirect, session, render_template
 import private.database
-
-class NavBarType:
-    nonavbar = 0
-    navbar = 1
-    sidebar = 2
-
-
+from private.utils import NavBarType
 
 def custom_template(
     site_page : str,
@@ -20,8 +14,6 @@ def custom_template(
     theme = request.cookies.get("theme")
     return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, navbar_type=navbar_type, theme=theme, **context)
 
-
-
 def routes(app : Flask):
 
     @app.route("/")
@@ -29,13 +21,12 @@ def routes(app : Flask):
         
         return custom_template("pages/home.html", "SendOver - Home", "", ["/static/css/home.css"], NavBarType.navbar)
 
-    
     @app.errorhandler(404)
     def not_found(e):
         return render_template("./errors/404.html")
     
-    @app.route("/test")
+    @app.route("/dark")
     def test():
         red = redirect("/")
-        red.set_cookie("theme", "dark")
+        red.set_cookie("theme", "dark", expires=None)
         return red
