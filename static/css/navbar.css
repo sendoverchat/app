@@ -4,13 +4,14 @@
     height: 45px;
 }
 .navbar svg path {
-    fill: var(--horty--red--600);
+    fill: var(--horty-red-600);
 }
 .navbar {
     position: fixed;
     height: 64px;
-   
+    background: var(--background);
     top: 0;
+    z-index: 99;
     display: inline-flex;
     padding:0px 45px;
     width: calc(100% - 90px);

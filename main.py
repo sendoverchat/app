@@ -2,6 +2,7 @@ from flask import Flask
 import json
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # import routes
 from private.routes import routes

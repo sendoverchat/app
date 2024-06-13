@@ -16,7 +16,13 @@ def custom_template(
     navbar_type : int = NavBarType.nonavbar,
     **context
 ):
-    return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, navbar_type=navbar_type, **context)
+    
+    cookie_theme = request.cookies.get("theme")
+    if cookie_theme == "black":
+        theme_black = True
+    else:
+        theme_black = False
+    return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, navbar_type=navbar_type, theme_black=theme_black, **context)
 
 
 
