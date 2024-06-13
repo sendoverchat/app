@@ -24,6 +24,11 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="/static/css/variables.css">
     <link rel="stylesheet" href="/static/css/styles.css">
+    {% if navbar_type == 1 %}
+        <link rel="stylesheet" href="/static/css/navbar.css">
+    {% elif navbar_type == 2 %}
+        <link rel="stylesheet" href="/static/css/sidebar.css">
+    {% endif %}
     {% for style in styles %}
         <link rel="stylesheet" href="{{style}}">
     {% endfor %}

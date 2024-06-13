@@ -1,0 +1,16 @@
+.navbar svg path {
+    fill: var(--horty--red--600);
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    display: inline-flex;
+    padding-left: 45px;
+    width: calc(100% - 45px);
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid var(--Text);
+}
+.navbar .menu {
+    
+}

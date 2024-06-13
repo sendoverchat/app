@@ -1,0 +1,25 @@
+:root {
+    --horty--red--50: #FEF2F3;
+    --horty--red--100: #FFE1E3;
+    --horty--red--200: #FFC8CC;
+    --horty--red--300: #FFA2A8;
+    --horty--red--400: #FD6C75;
+    --horty--red--500: #F53E4A;
+    --horty--red--600: #E2202D;
+    --horty--red--700: #D21925;
+    --horty--red--800: #9D1720;
+    --horty--red--900: #821A21;
+    --horty--red--950: #47080C;
+}
+body {
+    --background: #fff;
+	--Text: #000;
+	--container: #f9f9f9;
+	--button: #eee;
+}
+body#dark {
+    --background: #000;
+	--Text: #fff;
+	--container: #0b0b0b;
+	--button: #131313;
+}
