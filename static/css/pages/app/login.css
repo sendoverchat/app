@@ -74,7 +74,7 @@ background: var(--background, #FFF);
 width: calc(100% - 458px);
 margin-top: 15px;
 border-radius: 18px;
-border: 2px solid var(--contai);
+border: 2px solid var(--container);
 
 height: calc(57px - 40px);
 padding: 19px 433px 20px 21px;
