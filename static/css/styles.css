@@ -36,3 +36,19 @@ button.default {
     font-weight: 400;
     line-height: normal;
 }
+button.fill-pal {
+    border: none;
+    display: flex;
+    height: 58px;
+    padding: 0px 32px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background: var(--horty-red-100);
+    color: var(--horty-red-600);
+    font-family: Sora;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

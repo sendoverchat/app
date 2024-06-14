@@ -1,3 +1,6 @@
 flask
 mysql-connector-python
 requests
+smtplib
+ssl
+email
