@@ -4,3 +4,4 @@ requests
 smtplib
 ssl
 email
+flask_bcrypt

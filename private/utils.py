@@ -1,9 +1,16 @@
 import smtplib, ssl, json
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-
+from flask import session, request, render_template
 
 config = json.load(open("config.json", "r"))
+
+def verify_token():
+
+    if "user" in session:
+        return True
+
+    return False
 
 class NavBarType:
     nonavbar = 0
@@ -15,6 +22,20 @@ class StatusType:
     online = 1
     do_not_distrub = 2
     invisible = 3 
+
+def custom_template(
+    site_page : str,
+    title : str,
+    description : str,
+    styles : list,
+    navbar_type : int = NavBarType.nonavbar,
+    **context
+):
+    
+    theme = request.cookies.get("theme")
+    return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, navbar_type=navbar_type, theme=theme, **context)
+
+
 
 def sendEmail(sujet, body, email):
     port = config["smtp_port"]

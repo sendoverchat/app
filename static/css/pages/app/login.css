@@ -5,10 +5,14 @@ width: 100%;
 justify-content: center;
 align-items: center;
 position: absolute;
-top: 62px;
+
 gap: 55px;
 }
-
+@media screen and (max-width: 800px) {
+    .container-l-r {
+        top: 62px;
+    }
+}
 
 .container-l-r div {
     width: 526px;
@@ -83,7 +87,7 @@ flex-shrink: 0;
 }
 .input-zn input {
     background: none;
-    color: var(--blue-gray--900, #121212);
+    color: var(--Text);
 font-family: Sora;
 font-size: 14px;
 font-style: normal;
@@ -102,10 +106,16 @@ letter-spacing: 0.7px;
     transform: translateY(-50%);
     
 }
-.password-view path {
-    stroke: var(--blue-gray--900)!important;
+.input-zn .password-view#important {
+    opacity: 1;
 }
-.container-l-r button[type="submit"] {
+.password-view path {
+    stroke: var(--Text)!important;
+}
+.input-zn .password-view#important path{
+    stroke: var(--horty-red-600)!important;
+}
+.container-l-r button#big-button {
     display: inline-flex;
     padding: 16px 0px;
 width: 100%;
@@ -116,12 +126,7 @@ border-radius: 18px;
 
 
 }
-.container-l-r button[type="submit"] p {
-    color: var(--blue-gray--50)!important;
-}
-.container-l-r button[type="submit"] svg path {
-    stroke: var(--blue-gray--50)!important;
-}
+
 
 .container-l-r .join-cta {
     display: flex;
@@ -133,11 +138,11 @@ padding: 0px 43px;
 width: calc(526px - 86px);
 gap: 20px;
 border-radius: 18px;
-border: 1px solid var(--thunderbird--900);
-background: var(--thunderbird--400);
+border: 1px solid var(--horty-red-950);
+background: var(--button);
 }
 .join-cta h1 {
-    color: var(--blue-gray--50);
+    color: var(--Text);
 font-size: 40px;
 font-style: normal;
 font-weight: 700;
@@ -148,10 +153,10 @@ text-transform: capitalize;
 .join-cta h2 {
     text-align: center;
 
-    color: var(--blue-gray--50);
+    color: var(--text);
 }
 .join-cta p {
-    color: var(--blue-gray--50);
+    color: var(--text);
 }
 @media screen and (max-width: 1000px) {
     .container-l-r {
@@ -164,6 +169,8 @@ text-transform: capitalize;
     }
     .container-l-r .join-cta {
         width: calc(92% - 86px);
+        margin-top: 50px;
+        padding: 50px 43px;
     }
     .t-connect button {
         width: auto;
@@ -171,6 +178,9 @@ text-transform: capitalize;
     }
     .container-l-r .input-zn {
         padding: 19px 300px 20px 21px;
+    }
+    .container-l-r .input-zn {
+        width: calc(100% - 322px);
     }
 }
 .error {
