@@ -197,7 +197,7 @@ text-transform: capitalize;
     background-color: var(--container);
     border-radius: 8px;
     pointer-events: none;
-
+    display: none;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -205,7 +205,9 @@ text-transform: capitalize;
     transform: translateY(calc(100% + 10px));
     height: 200px;
 }
-
+.input-zn:hover .help-div-zone {
+    display: block;
+}
 .input-zn .help-div-zone svg {
     position: absolute;
     left: 22px;
@@ -223,7 +225,4 @@ text-transform: capitalize;
     font-weight: 400;
     line-height: normal;
    
-}
-.a2f-div {
-    margin-bottom: 200px;
 }

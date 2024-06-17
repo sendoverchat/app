@@ -49,7 +49,7 @@ def sendEmail(sujet, body, email):
     message["To"] = receiver_email
     message["Subject"] = sujet
 
-    message.attach(MIMEText(body, "plain"))
+    message.attach(MIMEText(body, "html"))
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:

@@ -3,6 +3,7 @@ import private.database
 from private.utils import NavBarType, custom_template
 from flask_bcrypt import Bcrypt
 import private.src_routes.app as approutes 
+import private.src_routes.api as apiroutes
 
 def routes(app : Flask):
 
@@ -21,3 +22,4 @@ def routes(app : Flask):
         return red
     
     approutes.routes(app)
+    apiroutes.routes(app)
