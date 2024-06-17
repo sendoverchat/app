@@ -48,12 +48,14 @@
 body {
     --background: #FFFFFF;
 	--Text: #000;
+	--text: #000;
 	--container: #F0F3F8;
 	--button: #E7EAF3;
 }
 body#dark {
     --background: #000;
 	--Text: #fff;
+	--text: #fff;
 	--container: #0B0B0B;
 	--button: #131313;
 }

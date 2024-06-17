@@ -1,5 +1,5 @@
 import mysql.connector, json, random, time
-
+from uuid import uuid4
 data = json.load(open("config.json", "r"))
 
 connection_params = {
@@ -55,7 +55,7 @@ class User:
     def insertUser(username, user_email, user_password, avatar):
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor() as cursor:
-                cursor.execute("INSERT INTO users (username, displayname, user_email, user_password, avatar) VALUES (%s, %s, %s, %s, %s)", (username, username, user_email, user_password, avatar,))
+                cursor.execute("INSERT INTO users (username, displayname, user_email, user_password, avatar, token) VALUES (%s, %s, %s, %s, %s, %s)", (username, username, user_email, user_password, avatar, uuid4(),))
                 db.commit()
 
     @staticmethod
@@ -84,6 +84,15 @@ class User:
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor(dictionary=True) as cursor:
                 cursor.execute("SELECT * FROM users WHERE user_email = %s", (email,))
+                return cursor.fetchone()
+            
+    @staticmethod
+    def getByToken(token):
+        if token == None:
+            return None
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM users WHERE token = %s", (token,))
                 return cursor.fetchone()
             
     @staticmethod

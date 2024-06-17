@@ -5,13 +5,6 @@ from flask import session, request, render_template
 
 config = json.load(open("config.json", "r"))
 
-def verify_token():
-
-    if "user" in session:
-        return True
-
-    return False
-
 class NavBarType:
     nonavbar = 0
     navbar = 1

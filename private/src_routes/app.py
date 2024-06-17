@@ -1,21 +1,52 @@
 from flask import request, Flask, redirect, session, render_template
 import private.database as db
-from private.utils import NavBarType, custom_template, verify_token, sendEmail
+from private.utils import NavBarType, custom_template, sendEmail
 from flask_bcrypt import Bcrypt
 import random
 
-def routes(app):
+def routes(app : Flask):
 
     bcrypt = Bcrypt(app)
 
-    # app
+
+    @app.route("/app/guild")
+    @app.route("/app/guild/")
+    def guild():
+
+        is_token = session.get("token") != None
+
+        if not is_token:
+            red = redirect("/app/login?return_url=/app/guild")
+            return red
+        
+        user = db.User.getByToken(session["token"])
+
+        return custom_template(site_page="pages/app/guild.html", title="SendOver - Guild", description="", styles=["/static/css/pages/app/guild.css"], navbar_type=NavBarType.sidebar, user=user)
+
+    @app.route("/app/friend")
+    @app.route("/app/friend/")
+    def friend():
+
+        is_token = session.get("token") != None
+        
+        if not is_token:
+            red = redirect("/app/login?return_url=/app/friend")
+            return red
+        
+        print(session["token"]) 
+        user = db.User.getByToken(session["token"])
+
+        return custom_template(site_page="pages/app/friend.html", title="SendOver - Friend", description="", styles=["/static/css/pages/app/friend.css"], navbar_type=NavBarType.sidebar, user=user)
+
+
+    # login register a2f
     @app.route("/app/login", methods=["POST", "GET"])
     @app.route("/app/login/", methods=["POST", "GET"])
     def login():
 
-        is_connected = verify_token()
+        is_token = session.get("token") != None
 
-        if is_connected:
+        if is_token:
 
             if request.args.get("return_url") == None:
                 red = redirect("/")
@@ -38,22 +69,28 @@ def routes(app):
                 if bcrypt.check_password_hash(user_get["user_password"], password):
                     
                     session["temp_user"] = user_get
-
-                    red = redirect("/app/a2f")
+                    url = session["return_url"]
+                    
+                    if url == None:
+                        red = redirect("/app/a2f")
+                    else:
+                        red = redirect("/app/a2f?return_url="+url)
                     return red
                     
                 else:
                     error = "Incorrect username or password."
         
+        session['return_url'] = request.args.get("return_url")
+
         return custom_template("pages/app/login.html", "SendOver - Login", "", ["/static/css/pages/app/login.css"], NavBarType.nonavbar, error=error)
     
     @app.route("/app/register", methods=["POST", "GET"])
     @app.route("/app/register/", methods=["POST", "GET"])
     def register():
         
-        is_connected = verify_token()
-
-        if is_connected:
+        is_token = session.get("token") != None
+        
+        if is_token:
             if request.args.get("return_url") == None:
                 red = redirect("/")
             else:
@@ -62,7 +99,7 @@ def routes(app):
             return red
         
         form = request.form
-        print(form.get("username"))
+        
         if form.get("username") != None and form.get("password") != None and form.get("password_comfirm") and form.get("email"):
 
             username = form.get("username")
@@ -96,8 +133,14 @@ def routes(app):
                 "nocreate" : True
             }
 
-            red = redirect("/app/a2f")
+            url = session["return_url"]
+            if url == None:
+                red = redirect("/app/a2f")
+            else:
+                red = redirect("/app/a2f?return_url="+url)
             return red
+        
+        session['return_url'] = request.args.get("return_url")
 
         return custom_template("pages/app/register.html", "SendOver - Register", "", ["/static/css/pages/app/register.css"], NavBarType.nonavbar, error="none")
     
@@ -128,19 +171,23 @@ def routes(app):
 
                 # create account :
                 if "nocreate" in user:
-                    db.User.insertUser(user["username"], user["user_email"], user["user_password"], f"/static/assets/default_avatars/avatar{random.randint(1, 4)}.png")
+                    
+                    db.User.insertUser(user["username"].lower(), user["user_email"], user["user_password"], f"/static/assets/default_avatars/avatar{random.randint(1, 4)}.png")
 
                 db.Auth_Code.updateUses(dbauth["auth_code_id"])
-                session["user"] = session["temp_user"]
-                red = redirect("/")
-
+                session["token"] = db.User.getByEmail(session["temp_user"]["user_email"])["token"]
+                url = session["return_url"]
+                if url != None:
+                    red = redirect(url)
+                else:
+                    red = redirect("/")
                 return red
 
 
         
-        is_connected = verify_token()
-
-        if is_connected:
+        is_token = session.get("token") != None
+        
+        if is_token:
             if request.args.get("return_url") == None:
                 red = redirect("/")
             else:
@@ -156,5 +203,7 @@ def routes(app):
         email = user["user_email"]
 
         sendEmail("Auth Code", "Your auth code is : <strong>"+str(db.Auth_Code.insert(email))+"</strong>", email)
+
+        session['return_url'] = request.args.get("return_url")
 
         return custom_template("pages/app/a2f.html", "SendOver - a2f", "", ["/static/css/pages/app/login.css"], NavBarType.nonavbar, error="none")
