@@ -6,6 +6,9 @@
         <h1>👋 It's a pleasure to see you</h1>
         <h2>Add your friends, be invited into channels and create your own community with our secure app.</h2>
                <!-- error in a div class "error -->
+        {% if error != "none" %}
+        <div class="error">{{error}}</div>
+        {% endif %}
         <div class="t-connect">
             
                 <button class="fill">
@@ -22,11 +25,11 @@
         </div>
         <form action="./register" method="post">
         <div class="input-zn">
-            <input type="text" placeholder="Username" name="username" require>
+            <input type="text" placeholder="Username" name="username" required>
         </div>
         
         <div class="input-zn">
-            <input type="password"  name="password" id="passwordInput" placeholder="••••••" require>
+            <input type="password"  name="password" id="passwordInput" placeholder="••••••" required>
             <svg onclick="togglePasswordVisibility()" class="password-view" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                  <g>
                      <path d="M10.3801 10.38C10.0854 10.6547 9.84897 10.9859 9.685 11.3539C9.52103 11.7218 9.43287 12.1191 9.42576 12.5219C9.41865 12.9247 9.49275 13.3248 9.64364 13.6984C9.79452 14.0719 10.0191 14.4113 10.304 14.6962C10.5888 14.981 10.9282 15.2056 11.3017 15.3565C11.6753 15.5074 12.0754 15.5815 12.4782 15.5744C12.881 15.5673 13.2783 15.4791 13.6463 15.3151C14.0143 15.1512 14.3455 14.9148 14.6201 14.62M11.23 5.58C11.6513 5.52751 12.0754 5.50079 12.5 5.5C19.5 5.5 22.5 12.5 22.5 12.5C22.0529 13.4571 21.4922 14.3569 20.83 15.18M7.11 7.10999C5.12125 8.46461 3.52987 10.3252 2.5 12.5C2.5 12.5 5.5 19.5 12.5 19.5C14.4159 19.5051 16.2908 18.9451 17.89 17.89M2.5 2.5L22.5 22.5"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -34,11 +37,11 @@
             </svg>
         </div>
         <div class="input-zn">
-            <input type="password"  name="password_comfirm" id="passwordInput" placeholder="comfirm password" require>
+            <input type="password"  name="password_comfirm" id="passwordInput" placeholder="comfirm password" required>
             
         </div>
         <div class="input-zn">
-            <input type="text" placeholder="Email" name="email" require>
+            <input type="email" placeholder="Email" name="email" required>
         </div>
 
       

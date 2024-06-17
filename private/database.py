@@ -17,7 +17,8 @@ class Auth_Code:
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor(dictionary=True) as cursor:
                 cursor.execute("SELECT * FROM auth_codes WHERE auth_email = %s AND auth_exp > %s AND auth_uses = 0", (email, timestamp))
-                return cursor.fetchone()
+                codes = cursor.fetchall()
+                return codes[-1]
             
     @staticmethod
     def updateUses(id):
@@ -25,12 +26,12 @@ class Auth_Code:
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor(dictionary=True) as cursor:
                 cursor.execute("SELECT * FROM auth_codes WHERE auth_code_id = %s", (id,))
-                uses = cursor.fetchone()["auth_uses"]
-        uses += 1
-        print(uses)
+                code = cursor.fetchone()
+    
+
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor() as cursor:
-                cursor.execute("UPDATE auth_codes SET auth_uses = %s WHERE auth_code_id = %s", (uses, id,))
+                cursor.execute("DELETE FROM auth_codes WHERE auth_email = %s", (code["auth_email"],))
                 db.commit()
             
 
@@ -47,8 +48,29 @@ class Auth_Code:
                     db.commit()
 
             return code
-
+    
 class User:
+
+    @staticmethod
+    def insertUser(username, user_email, user_password, avatar):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor() as cursor:
+                cursor.execute("INSERT INTO users (username, displayname, user_email, user_password, avatar) VALUES (%s, %s, %s, %s, %s)", (username, username, user_email, user_password, avatar,))
+                db.commit()
+
+    @staticmethod
+    def countUsername(username):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor() as cursor:
+                cursor.execute("SELECT COUNT(*) FROM users WHERE username = %s", (username,))
+                return cursor.fetchone()[0]
+            
+    @staticmethod
+    def countEmail(email):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor() as cursor:
+                cursor.execute("SELECT COUNT(*) FROM users WHERE user_email = %s", (email,))
+                return cursor.fetchone()[0]
 
     @staticmethod
     def getAll():
