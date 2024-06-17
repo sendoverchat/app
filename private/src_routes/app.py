@@ -9,6 +9,20 @@ def routes(app : Flask):
     bcrypt = Bcrypt(app)
 
 
+    @app.route("/app")
+    @app.route("/app/")
+    def app_():
+
+        is_token = session.get("token") != None
+
+        if not is_token:
+            red = redirect("/app/login?return_url=/app")
+            return red
+        
+        red = redirect("/app/friend")
+        return red
+
+
     @app.route("/app/guild")
     @app.route("/app/guild/")
     def guild():
@@ -33,7 +47,6 @@ def routes(app : Flask):
             red = redirect("/app/login?return_url=/app/friend")
             return red
         
-        print(session["token"]) 
         user = db.User.getByToken(session["token"])
 
         return custom_template(site_page="pages/app/friend.html", title="SendOver - Friend", description="", styles=["/static/css/pages/app/friend.css"], navbar_type=NavBarType.sidebar, user=user)

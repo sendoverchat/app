@@ -7,3 +7,5 @@ def routes(app : Flask):
 
     bcrypt = Bcrypt(app)
 
+    
+
