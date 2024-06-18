@@ -1,4 +1,4 @@
-from flask import request, Flask, redirect, session, render_template, abort
+from flask import request, Flask, redirect, session, render_template, abort, jsonify
 import private.database as db
 from private.utils import NavBarType, custom_template, sendEmail
 from flask_bcrypt import Bcrypt
@@ -16,7 +16,8 @@ def routes(app : Flask):
             red = redirect("/")
             return red
         
-        form = request.form
+        
+        form = request.json
 
         if form.get("user_id") != None:
 
@@ -26,7 +27,7 @@ def routes(app : Flask):
 
             db.FriendRequests.insert(user_id, receveur_id)
 
-            return "Friend request send !"
+            return jsonify({"success" : "Friend request send !"})
             
         else:
             red = redirect("/")

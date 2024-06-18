@@ -70,7 +70,7 @@ class FriendRequests:
     
     @staticmethod
     def insert(sender_id, receveur_id):
-        if len(FriendRequests.get(receveur_id, sender_id) == 1):
+        if len(FriendRequests.get(receveur_id, sender_id)) == 1:
             Friends.insert(receveur_id, sender_id)
             FriendRequests.drop(receveur_id, sender_id)
         else:

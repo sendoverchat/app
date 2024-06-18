@@ -33,3 +33,19 @@ class Popup
     }
 }
 
+async function sendFriendRequest(user_id) {
+
+    const response = await fetch("/api/local/addfriend", {
+        "method" : "POST",
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "user_id" : user_id
+        })
+    })
+
+    return response.json()
+
+}
+
