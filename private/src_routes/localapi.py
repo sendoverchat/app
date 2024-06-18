@@ -20,7 +20,13 @@ def routes(app : Flask):
 
         if form.get("user_id") != None:
 
-            pass
+            user = db.User.getByToken(session.get("token"))
+            user_id = user["user_id"]
+            receveur_id = form.get("user_id")
+
+            db.FriendRequests.insert(user_id, receveur_id)
+
+            return "Friend request send !"
             
         else:
             red = redirect("/")

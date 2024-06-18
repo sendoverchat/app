@@ -9,6 +9,76 @@ connection_params = {
     'database': data['db_name']
 }
 
+class Friends:
+    @staticmethod
+    def getAllByUserId(user_id):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM friends WHERE friend_1 = %s OR friend_2 = %s", (user_id, user_id,))
+
+                return cursor.fetchall()
+
+    @staticmethod
+    def get(user_1, user_2):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM friends WHERE (friend_1 = %s AND friend_2 = %s) OR (friend_1 = %s AND friend_2 = %s)", (user_1, user_2, user_2, user_1,))
+
+                return cursor.fetchall()
+
+    @staticmethod
+    def insert(user_1, user_2):
+
+        if(len(Friends.get(user_1, user_2)) == 0):
+
+            with mysql.connector.connect(**connection_params) as db:
+                with db.cursor() as cursor:
+                    cursor.execute("INSERT INTO friends (friend_1, friend_2) VALUES (%s, %s)", (user_1, user_2,))     
+                    db.commit()
+    
+    @staticmethod
+    def drop(user_1, user_2):
+        if(len(Friends.get(user_1, user_2)) == 1):
+            with mysql.connector.connect(**connection_params) as db:
+                with db.cursor() as cursor:
+                    cursor.execute("DELETE FROM friends WHERE (friend_1 = %s AND friend_2 = %s) OR (friend_1 = %s AND friend_2 = %s)", (user_1, user_2, user_2, user_1,))
+                    db.commit()
+
+class FriendRequests:
+    @staticmethod
+    def getAllByReceveurId(receveur_id):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM friend_requests WHERE friend_receveur = %s", (receveur_id,))
+                return cursor.fetchall()
+
+    @staticmethod
+    def get(sender_id, receveur_id):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM friend_requests WHERE friend_sender = %s AND friend_receveur = %s", (sender_id, receveur_id,))
+                return cursor.fetchall()
+            
+    @staticmethod
+    def drop(sender_id, receveur_id):
+        if len(FriendRequests.get(sender_id, receveur_id)) == 1:
+            with mysql.connector.connect(**connection_params) as db:
+                with db.cursor() as cursor:
+                    cursor.execute("DELETE FROM friend_requests WHERE friend_sender = %s AND friend_receveur = %s", (sender_id, receveur_id,))
+                    db.commit()
+
+    
+    @staticmethod
+    def insert(sender_id, receveur_id):
+        if len(FriendRequests.get(receveur_id, sender_id) == 1):
+            Friends.insert(receveur_id, sender_id)
+            FriendRequests.drop(receveur_id, sender_id)
+        else:
+            with mysql.connector.connect(**connection_params) as db:
+                with db.cursor() as cursor:
+                    cursor.execute("INSERT INTO friend_requests (friend_sender, friend_receveur) VALUES (%s, %s)", (sender_id, receveur_id,))
+                    db.commit()
+
 class Auth_Code:
 
     @staticmethod
