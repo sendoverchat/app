@@ -15,12 +15,12 @@ def routes(app : Flask):
     @app.errorhandler(404)
     def not_found(e):
         return render_template("./errors/404.html")
-    
-    @app.route("/dark")
+
+    @app.route("/test")
     def test():
-        red = redirect("/")
-        red.set_cookie("theme", "dark", expires=None)
-        return red
+
+        pass
+        return render_template("test.html")
     
     approutes.routes(app)
     apiroutes.routes(app)
