@@ -15,8 +15,17 @@ class Friends:
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor(dictionary=True) as cursor:
                 cursor.execute("SELECT * FROM friends WHERE friend_1 = %s OR friend_2 = %s", (user_id, user_id,))
+                data = cursor.fetchall()
+                
+                friends = []
+                for user in data:
+                    if user["friend_1"] == user_id:
+                        friends.append(User.getByID(user["friend_2"]))
+                    else:
+                        friends.append(User.getByID(user["friend_1"]))
 
-                return cursor.fetchall()
+                return friends
+
 
     @staticmethod
     def get(user_1, user_2):
@@ -70,14 +79,15 @@ class FriendRequests:
     
     @staticmethod
     def insert(sender_id, receveur_id):
-        if len(FriendRequests.get(receveur_id, sender_id)) == 1:
-            Friends.insert(receveur_id, sender_id)
-            FriendRequests.drop(receveur_id, sender_id)
-        else:
-            with mysql.connector.connect(**connection_params) as db:
-                with db.cursor() as cursor:
-                    cursor.execute("INSERT INTO friend_requests (friend_sender, friend_receveur) VALUES (%s, %s)", (sender_id, receveur_id,))
-                    db.commit()
+        if len(Friends.get(sender_id, receveur_id)) == 0 and len(FriendRequests.get(sender_id, receveur_id)) == 0:
+            if len(FriendRequests.get(receveur_id, sender_id)) == 1:
+                Friends.insert(receveur_id, sender_id)
+                FriendRequests.drop(receveur_id, sender_id)
+            else:
+                with mysql.connector.connect(**connection_params) as db:
+                    with db.cursor() as cursor:
+                        cursor.execute("INSERT INTO friend_requests (friend_sender, friend_receveur) VALUES (%s, %s)", (sender_id, receveur_id,))
+                        db.commit()
 
 class Auth_Code:
 

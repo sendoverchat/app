@@ -4,9 +4,12 @@ import json
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# import routes
-from private.routes import routes
-routes(app)
+try:
+    # import routes
+    from private.routes import routes
+    routes(app)
+except Exception as e:
+    print("Exeception : "+str(e))
 
 # config
 app.secret_key = json.load(open("config.json", "r"))["secret-key"]

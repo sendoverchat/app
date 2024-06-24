@@ -54,7 +54,7 @@ flex-shrink: 0;
 display: inline-flex;
 
 opacity: .8;
-color: var(--Text);
+color: var(--text);
 font-family: Sora;
 font-size: 20px;
 font-style: normal;
@@ -87,7 +87,7 @@ flex-shrink: 0;
 }
 .input-zn input {
     background: none;
-    color: var(--Text);
+    color: var(--text);
 font-family: Sora;
 font-size: 14px;
 font-style: normal;
@@ -110,7 +110,7 @@ letter-spacing: 0.7px;
     opacity: 1;
 }
 .password-view path {
-    stroke: var(--Text)!important;
+    stroke: var(--text)!important;
 }
 .input-zn .password-view#important path{
     stroke: var(--horty-red-600)!important;

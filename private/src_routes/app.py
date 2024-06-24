@@ -37,9 +37,9 @@ def routes(app : Flask):
 
         return custom_template(site_page="pages/app/guild.html", title="SendOver - Guild", description="", styles=["/static/css/pages/app/guild.css"], navbar_type=NavBarType.sidebar, user=user)
 
-    @app.route("/app/friend")
-    @app.route("/app/friend/")
-    def friend():
+    @app.route("/app/friends")
+    @app.route("/app/friends/")
+    def friends():
 
         is_token = session.get("token") != None
         
@@ -49,7 +49,9 @@ def routes(app : Flask):
         
         user = db.User.getByToken(session["token"])
 
-        return custom_template(site_page="pages/app/friend.html", title="SendOver - Friend", description="", styles=["/static/css/pages/app/friend.css"], navbar_type=NavBarType.sidebar, user=user)
+        friends_list = db.Friends.getAllByUserId(user["user_id"])
+
+        return custom_template(site_page="pages/app/friends.html", title="SendOver - Friends", description="", styles=["/static/css/pages/app/friends.css"], navbar_type=NavBarType.sidebar, user=user, friends_list=friends_list)
 
 
     # login register a2f

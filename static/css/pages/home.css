@@ -21,7 +21,7 @@
    
 }
 .title-div-container h1 {
-    color: var(--Text);
+    color: var(--text);
     font-family: "Clash Display Variable";
     font-size: 48px;
     font-style: normal;
@@ -37,7 +37,7 @@
 
 }
 .title-div-container p {
-    color: var(--Text);
+    color: var(--text);
     font-family: Sora;
     font-size: 20px;
     width: 100%;

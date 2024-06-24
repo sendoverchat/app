@@ -1,0 +1,48 @@
+nav {
+    position: fixed;
+    height: 55px;
+    display: flex;
+    top: 0;
+
+    padding: 0px 13px;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 26px);
+    background-color: var(--horty-red-950);
+}
+nav h1 {
+    position: relative;
+    color: var(--horty-red-50);
+    font-family: "Clash Display Variable";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+nav .div-container-list {
+    display: flex;
+height: 100%;
+padding: 0px 13px;
+justify-content: flex-end;
+align-items: center;
+gap: 25px;
+}
+nav .div-container-list .p-link-list {
+    color: var(--horty-red-50);
+    font-family: Sora;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+nav .div-container-list svg path {
+    stroke: var(--horty-red-50);
+}
+nav .div-container-list svg {
+    display: none;
+}
+@media screen and (max-width: 500px) {
+    nav .div-container-list svg {
+        display: block;
+    }
+}
