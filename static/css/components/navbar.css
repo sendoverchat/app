@@ -3,7 +3,7 @@ nav {
     height: 55px;
     display: flex;
     top: 0;
-
+z-index: 99;
     padding: 0px 13px;
     justify-content: space-between;
     align-items: center;
@@ -19,9 +19,10 @@ nav h1 {
     font-weight: 700;
     line-height: normal;
 }
-nav .div-container-list {
-    display: flex;
+nav .div-container-list .div-burger-menu-container {
+
 height: 100%;
+z-index: -1;
 padding: 0px 13px;
 justify-content: flex-end;
 align-items: center;
@@ -40,9 +41,32 @@ nav .div-container-list svg path {
 }
 nav .div-container-list svg {
     display: none;
+    cursor: pointer;
 }
+
 @media screen and (max-width: 500px) {
     nav .div-container-list svg {
         display: block;
     }
+  
+    nav .div-container-list .div-burger-menu-container {
+       width: 100%;
+       height: 100%;
+       position: fixed;
+       top: 0;
+       left: 0;
+       
+       background-color: var(--horty-red-950);
+    flex-direction: column;
+    justify-content: center!important;
+    align-items: center;
+    gap: 24px;
+       right: 0;
+       
+       left: 0;
+    }
 }
+@media screen and (min-width: 500px) {
+    nav .div-container-list .div-burger-menu-container {
+        display: flex!important;
+    }}
