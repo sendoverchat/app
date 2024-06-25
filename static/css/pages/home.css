@@ -1,53 +1,23 @@
-
-
-.content{
-    display: flex;
-    padding: 0px 50px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: calc(100% - 100px);
-    height: calc(100vh - 65px);
-    margin-top: 65px;
+.div-container-landing-page {
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    height: 852.5px;
+ }
+.div-container-landing-page .div-banner-chiante {
+    width: 100%;
+    height: 852.5px;
+    background: url('../../assets/svg/home/vector.png');
+    background-repeat: repeat-x;
 }
-.title-div-container {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+
+.div-container-landing-page .div-container-text {
+    display: flex;
+    width: 100%;
+    max-width: 659px;
  
-    width: 100%;
-    max-width: 543px;
-   
-}
-.title-div-container h1 {
-    color: var(--text);
-    font-family: "Clash Display Variable";
-    font-size: 48px;
-    font-style: normal;
-    width: 100%;
-    font-weight: 600;
-    line-height: normal;
-}
-.title-div-container svg{
-    max-width: 300px;
-}
-.title-div-container h1 span {
-    color: var(--horty-red-700);
-
-}
-.title-div-container p {
-    color: var(--text);
-    font-family: Sora;
-    font-size: 20px;
-    width: 100%;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 30px; 
-    opacity: .8;
-}
-.title-div-container .buttons-div-container {
-    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 10px;
 }

@@ -8,7 +8,7 @@ z-index: 99;
     justify-content: space-between;
     align-items: center;
     width: calc(100% - 26px);
-    background-color: var(--horty-red-950);
+    background-color: var(--horty-red-950);//dsdfd
 }
 nav h1 {
     position: relative;
