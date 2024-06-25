@@ -44,7 +44,7 @@ def routes(app : Flask):
         is_token = session.get("token") != None
         
         if not is_token:
-            red = redirect("/app/login?return_url=/app/friend")
+            red = redirect("/app/login?return_url=/app/friends")
             return red
         
         user = db.User.getByToken(session["token"])
@@ -54,7 +54,27 @@ def routes(app : Flask):
         return custom_template(site_page="pages/app/friends.html", title="SendOver - Friends", description="", styles=["/static/css/pages/app/friends.css"], navbar_type=NavBarType.sidebar, user=user, friends_list=friends_list)
 
 
-    # login register a2f
+    @app.route("/app/friend/channel/<user_id>")
+    @app.route("/app/friend/channel/<user_id>/")
+    def friend_channel(user_id):
+
+        is_token = session.get("token") != None
+        
+        if not is_token:
+            red = redirect("/app/login?return_url=/app/friends")
+            return red
+
+        user = db.User.getByToken(session["token"])
+
+        friend = db.User.getByID(user_id)
+
+        if(friend == None or db.Friends.get(friend["user_id"], user["user_id"]) == None):
+            return redirect("/app/friends")
+
+        return custom_template("pages/app/friend_channel.html", title=f"SendOver - {friend['username']}", description="", styles=[], friend=friend)
+
+
+    # auth
     @app.route("/app/login", methods=["POST", "GET"])
     @app.route("/app/login/", methods=["POST", "GET"])
     def login():

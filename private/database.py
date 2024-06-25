@@ -33,7 +33,7 @@ class Friends:
             with db.cursor(dictionary=True) as cursor:
                 cursor.execute("SELECT * FROM friends WHERE (friend_1 = %s AND friend_2 = %s) OR (friend_1 = %s AND friend_2 = %s)", (user_1, user_2, user_2, user_1,))
 
-                return cursor.fetchall()
+                return cursor.fetchone()
 
     @staticmethod
     def insert(user_1, user_2):

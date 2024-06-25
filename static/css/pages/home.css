@@ -1,11 +1,17 @@
+body {
+    min-height: 1610px;
+}
+
 .div-container-landing-page {
     width: 100%;
     position: absolute;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow: visible;
     height: 852.5px;
  }
 .div-container-landing-page .div-banner-chiante {
     width: 100%;
+    position: absolute;
     height: 852.5px;
     background: url('../../assets/svg/home/vector.png');
     background-repeat: repeat-x;
@@ -14,10 +20,112 @@
 .div-container-landing-page .div-container-text {
     display: flex;
     width: 100%;
-    max-width: 659px;
- 
+    max-width: calc(659px - 2 * 20px);
+    padding: 20px;
+
+    top: 253px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+.div-container-landing-page .div-container-text h1 {
+    color: var(--horty-red-50);
+    text-align: center;
+    font-family: "Clash Display Variable";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    align-self: stretch;
+}
+.div-container-landing-page .div-container-text p {
+    align-self: stretch;
+    color: var(--horty-red-50);
+    text-align: center;
+    font-family: Sora;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+.div-container-text .div-content-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+.div-container-text .div-content-buttons button {
+    border: none;
+    display: flex;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    font-family: Sora;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 8px;
+    line-height: 24px;
+}
+.div-content-buttons button#first {
+ 
+    color: var(--horty-red-50);
+
+    background: var(--horty-red-500);
+}
+.div-content-buttons button#second {
+    color: var(--text);
+    background: var(--button);
+}
+.div-screen-display {
+    position: relative;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 857px;
+height: 482px;
+flex-shrink: 0;
+transform-style: preserve-3d;
+transition: transform 0.1s ease-out;
+top: 336px;
+left: 50%;
+background: url('../../assets/img/pages/home/Desktop_-_1.png');
+background-size: cover;
+transform: translateX(-50%);
+image-rendering: crisp-edges;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+@media screen and (max-width: 800px) {
+.div-screen-display {
+    display: none;
+}
+}
+.highlight {
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--horty-red-900);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
+}
+
+@keyframes highlight {
+    
 }

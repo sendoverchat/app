@@ -1,6 +1,38 @@
 <!-- NavBar = true -->
 <div class="div-container-landing-page">
     <div class="div-banner-chiante">
-        
+
     </div>
+    <div class="div-container-text">
+        <h1>Start <span class="highlight">chatting</span> for games or meetings</h1>
+        <p>Imagine your space as an openspace. The space is designed to be flexible, allowing teams to reorganize the space according to their needs.</p>
+        <div class="div-content-buttons">
+            <button id="first">Register</button>
+            <button id="second">Login</button>
+        </div>
+    </div>
+    <div class="div-screen-display"></div>
 </div>
+<script>
+    document.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        const centerY = window.innerHeight / 2;
+
+        const element = document.querySelector('.div-screen-display');
+        const rect = element.getBoundingClientRect();
+        const elementCenterY = rect.top + rect.height / 2;
+
+        const deltaY = centerY - elementCenterY;
+
+        const rotationX = deltaY * 0.12; 
+
+        element.style.transform = `rotateX(${rotationX}deg) translateX(-50%)`;
+
+        const maxShadow = 4; 
+        const minShadow = 0;
+        const shadowIntensity = Math.max(minShadow, maxShadow - (scrollTop / 100)); // Adjust this to change sensitivity
+
+        element.style.boxShadow = `0px ${shadowIntensity}px ${shadowIntensity}px 0px rgba(0, 0, 0, 0.25)`;
+    });
+</script>
