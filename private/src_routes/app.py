@@ -22,21 +22,6 @@ def routes(app : Flask):
         red = redirect("/app/friend")
         return red
 
-
-    @app.route("/app/guild")
-    @app.route("/app/guild/")
-    def guild():
-
-        is_token = session.get("token") != None
-
-        if not is_token:
-            red = redirect("/app/login?return_url=/app/guild")
-            return red
-        
-        user = db.User.getByToken(session["token"])
-
-        return custom_template(site_page="pages/app/guild.html", title="SendOver - Guild", description="", styles=["/static/css/pages/app/guild.css"], navbar_type=NavBarType.sidebar, user=user)
-
     @app.route("/app/friends")
     @app.route("/app/friends/")
     def friends():
@@ -71,7 +56,7 @@ def routes(app : Flask):
         if(friend == None or db.Friends.get(friend["user_id"], user["user_id"]) == None):
             return redirect("/app/friends")
 
-        return custom_template("pages/app/friend_channel.html", title=f"SendOver - {friend['username']}", description="", styles=[], friend=friend)
+        return custom_template("pages/app/friend_channel.html", title=f"SendOver - {friend['username']}", description="", user=user, styles=[], friend=friend, navbar_type=NavBarType.sidebar)
 
 
     # auth
@@ -84,7 +69,7 @@ def routes(app : Flask):
         if is_token:
 
             if request.args.get("return_url") == None:
-                red = redirect("/")
+                red = redirect("/app/friends")
             else:
                 red = redirect(request.args.get("return_url"))
             

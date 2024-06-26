@@ -226,3 +226,13 @@ text-transform: capitalize;
     line-height: normal;
    
 }
+.default {
+    border: none;
+    background-color: var(--horty-red-600);
+    color: var(--horty-red-50);
+    justify-content: center;
+
+}
+.default svg path {
+    fill: var(--horty-red-50);
+}

@@ -38,7 +38,7 @@ class Friends:
     @staticmethod
     def insert(user_1, user_2):
 
-        if(len(Friends.get(user_1, user_2)) == 0):
+        if Friends.get(user_1, user_2) == None:
 
             with mysql.connector.connect(**connection_params) as db:
                 with db.cursor() as cursor:
@@ -79,7 +79,7 @@ class FriendRequests:
     
     @staticmethod
     def insert(sender_id, receveur_id):
-        if len(Friends.get(sender_id, receveur_id)) == 0 and len(FriendRequests.get(sender_id, receveur_id)) == 0:
+        if Friends.get(sender_id, receveur_id) == None and len(FriendRequests.get(sender_id, receveur_id)) == 0:
             if len(FriendRequests.get(receveur_id, sender_id)) == 1:
                 Friends.insert(receveur_id, sender_id)
                 FriendRequests.drop(receveur_id, sender_id)
@@ -135,7 +135,8 @@ class User:
     def insertUser(username, user_email, user_password, avatar):
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor() as cursor:
-                cursor.execute("INSERT INTO users (username, displayname, user_email, user_password, avatar, token) VALUES (%s, %s, %s, %s, %s, %s)", (username, username, user_email, user_password, avatar, uuid4(),))
+                uuid = str(uuid4())
+                cursor.execute("INSERT INTO users (username, displayname, user_email, user_password, avatar, token) VALUES (%s, %s, %s, %s, %s, %s)", (username, username, user_email, user_password, avatar, uuid,))
                 db.commit()
 
     @staticmethod
@@ -188,3 +189,10 @@ class User:
             with db.cursor(dictionary=True) as cursor:
                 cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
                 return cursor.fetchone()
+            
+    @staticmethod
+    def updateStatus(user_id, status):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor() as cursor:
+                cursor.execute("UPDATE users SET user_status = %s WHERE user_id = %s", (status, user_id,))
+                db.commit()

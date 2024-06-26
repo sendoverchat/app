@@ -1,0 +1,154 @@
+.sidebar {
+    display: flex;
+    width: calc(100% - 2 * 10px);
+    margin: 10px;
+    align-items: center;
+    gap: 10px;
+} 
+.sidebar .div-profile-preview-cta {
+    display: flex;
+    width: calc(100% - 2 * 10px);
+    max-width: 230px;
+    height: 40px;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--container);
+}
+.div-profile-preview-cta .div-profile-picture-container {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    padding: 1px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 50%;
+
+}
+.div-profile-preview-cta .div-profile-picture-container .div-profile-status-info {
+    width: 9.6px;
+    height: 9.6px;
+    border: 1px solid var(--container);
+   border-radius: 50%;
+    
+
+}
+.div-profile-preview-cta .div-profile-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+.div-profile-preview-cta .div-profile-info-container h1 {
+    color: var(--text);
+    font-family: Sora;
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: capitalize;
+    line-height: normal;
+}
+.div-profile-preview-cta .div-profile-info-container p {
+    color: var(--text);
+    font-family: Sora;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.div-profile-preview-cta svg {
+    cursor: pointer;
+}
+.div-profile-preview-cta svg path {
+    stroke: var(--no-hover);
+    transition: 0.3s ease-out;
+}
+.div-profile-preview-cta svg:hover path {
+    stroke: var(--text);
+    transition: 0.3s ease-out;
+}
+.sidebar .div-guild-list-container {
+    border-radius: 10px;
+    background: var(--container);
+    display: flex;
+    height: 60px;
+   
+
+    align-items: center;
+    overflow: hidden;
+    overflow-x: scroll;
+    flex: 1 0 0;
+}
+
+.div-guild-list-container{
+    scrollbar-width: none;
+  }
+
+  .div-guild-list-container::-webkit-scrollbar {
+    width: 0px;
+  }
+
+
+
+.div-guild-list-container .div-element-guild-cta {
+    display: flex;
+    width: 40px;
+    position: relative;
+    height: 60px;
+    cursor: pointer;
+    padding: 0px 10px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border-radius: 50%;
+}
+.div-guild-list-container .div-element-guild-cta .div-bar-player-notif {
+    width: 50%;
+    height: 2px;
+    flex-shrink: 0;
+    border-radius: 50% 50% 0px 0px;
+    background: var(--container);
+    transition: 0.3s ease-out;
+}
+.div-guild-list-container .div-element-guild-cta:hover .div-bar-player-notif {
+    width: 80%;
+    background: var(--no-hover);
+    transition: 0.3s ease-out;
+}
+.div-guild-list-container .div-element-guild-cta:active .div-guild-picture {
+    transform: scale(0.9);
+    transition: 0.3s ease-out;
+}
+.div-guild-list-container .div-element-guild-cta .div-guild-picture {
+    height: 40px;
+    transition: 0.3s ease-out;
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 40px;
+    border-radius: 50%;
+    background: var(--button);
+
+    background-size: cover!important;
+    background-position: center!important;
+   
+}
+.div-guild-list-container .div-element-guild-cta .div-guild-picture svg {
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    position: absolute;
+}
+.div-guild-list-container .div-element-guild-cta .div-guild-picture svg path {
+    stroke: var(--text);
+}

@@ -227,3 +227,13 @@ text-transform: capitalize;
 .a2f-div {
     margin-bottom: 200px;
 }
+.default {
+    border: none;
+    background-color: var(--horty-red-600);
+    color: var(--horty-red-50);
+    justify-content: center;
+
+}
+.default svg path {
+    fill: var(--horty-red-50);
+}

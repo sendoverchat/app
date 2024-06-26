@@ -34,6 +34,12 @@
     {% endfor %}
 </head>
 <body id="{{theme}}">
+    <script>
+        // NOT WATCH THIS CODE;
+        console.warn("%cDANGER!!! RISK OF ACCOUNT LOSS IF YOU SHOW THIS CONSOLE!", "color: red;font-size: 20px;");
+        const token = "{{user['token']}}";
+        const urlSocket = "wss://sendover.fr:19062"
+    </script>
     {% if navbar_type == 1 %}
         {% include "components/navbar.html" %}
     {% elif navbar_type == 2 %}
@@ -41,7 +47,12 @@
     {% endif %}
     {% include site_page %}
 
+    
     <script src="/static/js/utils.js"></script>
+    {% if navbar_type == 1 %}
     <script src="/static/js/navbar.js"></script>
+    {% elif navbar_type == 2 %}
+    <script src="/static/js/sidebar.js"></script>
+    {% endif %}
 </body>
 </html>

@@ -14,7 +14,8 @@ class StatusType:
     offline = 0
     online = 1
     do_not_distrub = 2
-    invisible = 3 
+    invisible = 3
+    focus = 4
 
 def custom_template(
     site_page : str,
@@ -22,11 +23,12 @@ def custom_template(
     description : str,
     styles : list,
     navbar_type : int = NavBarType.nonavbar,
+    user = {"token" : "logout"},
     **context
 ):
     
     theme = request.cookies.get("theme")
-    return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, navbar_type=navbar_type, theme=theme, **context)
+    return render_template("index.html", site_page=site_page,title=title,description=description,styles=styles, user=user, navbar_type=navbar_type, theme=theme, **context)
 
 
 

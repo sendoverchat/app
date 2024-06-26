@@ -1,0 +1,115 @@
+<div class="sidebar">
+    <div class="div-profile-preview-cta">
+        <div class="div-profile-picture-container">
+            <style>
+                .div-profile-picture-container {
+                    background: url('{{user["avatar"]}}');
+                    background-size: cover;
+                    background-position: center;
+                }
+            </style>
+            <div class="div-profile-status-info">
+                <style>
+                    {# Status #}
+                    .div-profile-status-info {
+                        {% if user["user_status_choice"] == 0 %}
+                            background: var(--no-hover);                        
+                        {% elif user["user_status_choice"] == 1 %}
+                            background: var(--fire-breeze-500);
+                        {% elif user["user_status_choice"] == 2 %}
+                            background: var(--horty-red-600);
+                        {% elif user["user_status_choice"] == 3 %}
+                            background: var(--no-hover);
+                        {% elif user["user_status_choice"] == 4 %}
+                            background: var(--fuwa-link-600);
+                        {% endif %}
+                    }
+                </style>
+            </div>
+           
+        </div>
+        <div class="div-profile-info-container">
+            <h1>{{user["displayname"]}}</h1>
+            <p>
+                {% if user["user_status_choice"] == 0 %}
+                    What are you doing?!
+                {% elif user["user_status_choice"] == 1 %}
+                    Online
+                {% elif user["user_status_choice"] == 2 %}
+                    Do not distrub
+                {% elif user["user_status_choice"] == 3 %}
+                    Invisible
+                {% elif user["user_status_choice"] == 4 %}
+                    Focus
+                {% endif %}
+            </p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M8.58317 17.5C8.72266 17.7537 8.92771 17.9652 9.17691 18.1126C9.42612 18.26 9.71032 18.3377 9.99984 18.3377C10.2894 18.3377 10.5736 18.26 10.8228 18.1126C11.072 17.9652 11.277 17.7537 11.4165 17.5M5 6.66663C5 5.34054 5.52678 4.06877 6.46447 3.13109C7.40215 2.19341 8.67392 1.66663 10 1.66663C11.3261 1.66663 12.5979 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663C15 12.5 17.5 14.1666 17.5 14.1666H2.5C2.5 14.1666 5 12.5 5 6.66663Z" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10.1824 1.66663H9.81569C9.37366 1.66663 8.94974 1.84222 8.63718 2.15478C8.32462 2.46734 8.14903 2.89127 8.14903 3.33329V3.48329C8.14873 3.77556 8.07157 4.06262 7.92531 4.31566C7.77904 4.5687 7.56881 4.77882 7.31569 4.92496L6.95736 5.13329C6.70399 5.27957 6.41659 5.35658 6.12403 5.35658C5.83146 5.35658 5.54406 5.27957 5.29069 5.13329L5.16569 5.06663C4.78325 4.84601 4.32889 4.78616 3.90236 4.90022C3.47583 5.01427 3.11198 5.29291 2.89069 5.67496L2.70736 5.99163C2.48674 6.37407 2.42689 6.82843 2.54095 7.25496C2.655 7.68149 2.93364 8.04533 3.31569 8.26663L3.44069 8.34996C3.69259 8.49539 3.90204 8.7042 4.04823 8.95565C4.19443 9.2071 4.27227 9.49244 4.27403 9.78329V10.2083C4.27519 10.502 4.19873 10.7908 4.05239 11.0454C3.90606 11.3 3.69503 11.5115 3.44069 11.6583L3.31569 11.7333C2.93364 11.9546 2.655 12.3184 2.54095 12.745C2.42689 13.1715 2.48674 13.6258 2.70736 14.0083L2.89069 14.325C3.11198 14.707 3.47583 14.9856 3.90236 15.0997C4.32889 15.2138 4.78325 15.1539 5.16569 14.9333L5.29069 14.8666C5.54406 14.7203 5.83146 14.6433 6.12403 14.6433C6.41659 14.6433 6.70399 14.7203 6.95736 14.8666L7.31569 15.075C7.56881 15.2211 7.77904 15.4312 7.92531 15.6843C8.07157 15.9373 8.14873 16.2244 8.14903 16.5166V16.6666C8.14903 17.1087 8.32462 17.5326 8.63718 17.8451C8.94974 18.1577 9.37366 18.3333 9.81569 18.3333H10.1824C10.6244 18.3333 11.0483 18.1577 11.3609 17.8451C11.6734 17.5326 11.849 17.1087 11.849 16.6666V16.5166C11.8493 16.2244 11.9265 15.9373 12.0727 15.6843C12.219 15.4312 12.4292 15.2211 12.6824 15.075L13.0407 14.8666C13.2941 14.7203 13.5815 14.6433 13.874 14.6433C14.1666 14.6433 14.454 14.7203 14.7074 14.8666L14.8324 14.9333C15.2148 15.1539 15.6692 15.2138 16.0957 15.0997C16.5222 14.9856 16.8861 14.707 17.1074 14.325L17.2907 14C17.5113 13.6175 17.5712 13.1632 17.4571 12.7366C17.343 12.3101 17.0644 11.9463 16.6824 11.725L16.5574 11.6583C16.303 11.5115 16.092 11.3 15.9457 11.0454C15.7993 10.7908 15.7229 10.502 15.724 10.2083V9.79163C15.7229 9.49794 15.7993 9.20917 15.9457 8.95454C16.092 8.69991 16.303 8.48847 16.5574 8.34163L16.6824 8.26663C17.0644 8.04533 17.343 7.68149 17.4571 7.25496C17.5712 6.82843 17.5113 6.37407 17.2907 5.99163L17.1074 5.67496C16.8861 5.29291 16.5222 5.01427 16.0957 4.90022C15.6692 4.78616 15.2148 4.84601 14.8324 5.06663L14.7074 5.13329C14.454 5.27957 14.1666 5.35658 13.874 5.35658C13.5815 5.35658 13.2941 5.27957 13.0407 5.13329L12.6824 4.92496C12.4292 4.77882 12.219 4.5687 12.0727 4.31566C11.9265 4.06262 11.8493 3.77556 11.849 3.48329V3.33329C11.849 2.89127 11.6734 2.46734 11.3609 2.15478C11.0483 1.84222 10.6244 1.66663 10.1824 1.66663Z"  stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.99902 12.5C11.3797 12.5 12.499 11.3807 12.499 9.99996C12.499 8.61925 11.3797 7.49996 9.99902 7.49996C8.61831 7.49996 7.49902 8.61925 7.49902 9.99996C7.49902 11.3807 8.61831 12.5 9.99902 12.5Z" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+    </div>
+    <div class="div-guild-list-container">
+
+        <div class="div-element-guild-cta" >
+           
+
+            <!-- Default message -->
+             <div class="div-guild-picture">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <g clip-path="url(#clip0_7701_18)">
+                      <path d="M14.9993 7.49996H16.666C17.108 7.49996 17.532 7.67555 17.8445 7.98812C18.1571 8.30068 18.3327 8.7246 18.3327 9.16663V18.3333L14.9993 15H9.99935C9.55732 15 9.1334 14.8244 8.82084 14.5118C8.50828 14.1992 8.33268 13.7753 8.33268 13.3333V12.5M11.666 7.49996C11.666 7.94199 11.4904 8.36591 11.1779 8.67847C10.8653 8.99103 10.4414 9.16663 9.99935 9.16663H4.99935L1.66602 12.5V3.33329C1.66602 2.41663 2.41602 1.66663 3.33268 1.66663H9.99935C10.4414 1.66663 10.8653 1.84222 11.1779 2.15478C11.4904 2.46734 11.666 2.89127 11.666 3.33329V7.49996Z" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_7701_18">
+                        <rect width="20" height="20" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+             </div>
+             <div class="div-bar-player-notif"></div>
+         </div>
+
+
+
+        <!-- List guild -->
+        <div class="div-element-guild-cta">
+           <style>
+            #guild-test {
+                background: url(https://cdn.discordapp.com/attachments/1252320400772432052/1255610540714364948/664cc51b16b94.png?ex=667dc1f1&is=667c7071&hm=5dc7be3e5abad2452ac11ff89ce47d1517bb8fa8d87f2cf0a08f55519b73252d&);
+            }
+           </style>
+            <div class="div-guild-picture" id="guild-test"></div>
+            <div class="div-bar-player-notif"></div>
+        </div>
+     
+         
+
+        <!-- Add guild -->
+
+        <div class="div-element-guild-cta" >
+           
+            <div class="div-guild-picture">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4.16602 9.99996H15.8327M9.99935 4.16663V15.8333" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+            </div>
+            <div class="div-bar-player-notif"></div>
+        </div>
+    </div>
+</div>
+<script>
+    const container = document.querySelector('.div-guild-list-container');
+
+    container.addEventListener('wheel', function(event) {
+        event.preventDefault();
+        if (event.deltaY > 0) {
+            container.scrollLeft += 100;
+        } else {
+            container.scrollLeft -= 100;
+        }
+    });
+</script>
