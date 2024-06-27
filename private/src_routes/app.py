@@ -22,6 +22,11 @@ def routes(app : Flask):
         red = redirect("/app/friend")
         return red
 
+    @app.route("/app/friend")
+    @app.route("/app/friend/")
+    def friend():
+        return redirect("/app/friends")
+
     @app.route("/app/friends")
     @app.route("/app/friends/")
     def friends():
@@ -35,6 +40,8 @@ def routes(app : Flask):
         user = db.User.getByToken(session["token"])
 
         friends_list = db.Friends.getAllByUserId(user["user_id"])
+        pending_by_author = db.FriendRequests.getAllBySenderId(user["user_id"])
+        pending_by_users = db.FriendRequests.getAllByReceveurId(user["user_id"])
 
         online_count = 0
         offline_count = 0
@@ -50,7 +57,7 @@ def routes(app : Flask):
             "online_count" : online_count
         } 
 
-        return custom_template(site_page="pages/app/friends.html", title="SendOver - Friends", description="", styles=["/static/css/pages/app/friends.css"], navbar_type=NavBarType.sidebar, user=user, friends_list=friends_list, friends_status_count=friends_status_count)
+        return custom_template(site_page="pages/app/friends.html", title="SendOver - Friends", description="", styles=["/static/css/pages/app/friends.css"], navbar_type=NavBarType.sidebar, user=user, friends_list=friends_list, friends_status_count=friends_status_count, pending_by_author = pending_by_author, pending_by_users = pending_by_users)
 
 
     @app.route("/app/friend/channel/<user_id>")

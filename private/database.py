@@ -55,6 +55,13 @@ class Friends:
 
 class FriendRequests:
     @staticmethod
+    def getAllBySenderId(receveur_id):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM friend_requests WHERE friend_receveur = %s", (receveur_id,))
+                return cursor.fetchall()
+            
+    @staticmethod
     def getAllByReceveurId(receveur_id):
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor(dictionary=True) as cursor:
