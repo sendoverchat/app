@@ -36,7 +36,21 @@ def routes(app : Flask):
 
         friends_list = db.Friends.getAllByUserId(user["user_id"])
 
-        return custom_template(site_page="pages/app/friends.html", title="SendOver - Friends", description="", styles=["/static/css/pages/app/friends.css"], navbar_type=NavBarType.sidebar, user=user, friends_list=friends_list)
+        online_count = 0
+        offline_count = 0
+
+        for friend in friends_list:
+            if friend["user_status"] != 0 and friend["user_status"] != 3:
+                online_count+=1
+            else:
+                offline_count+=1
+
+        friends_status_count = {
+            "offline_count" : offline_count,
+            "online_count" : online_count
+        } 
+
+        return custom_template(site_page="pages/app/friends.html", title="SendOver - Friends", description="", styles=["/static/css/pages/app/friends.css"], navbar_type=NavBarType.sidebar, user=user, friends_list=friends_list, friends_status_count=friends_status_count)
 
 
     @app.route("/app/friend/channel/<user_id>")

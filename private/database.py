@@ -47,7 +47,7 @@ class Friends:
     
     @staticmethod
     def drop(user_1, user_2):
-        if(len(Friends.get(user_1, user_2)) == 1):
+        if(Friends.get(user_1, user_2) != None):
             with mysql.connector.connect(**connection_params) as db:
                 with db.cursor() as cursor:
                     cursor.execute("DELETE FROM friends WHERE (friend_1 = %s AND friend_2 = %s) OR (friend_1 = %s AND friend_2 = %s)", (user_1, user_2, user_2, user_1,))

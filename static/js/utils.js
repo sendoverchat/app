@@ -49,3 +49,33 @@ async function sendFriendRequest(user_id) {
 
 }
 
+async function deniedFriendRequest(user_id) {
+
+    const response = await fetch("/api/local/deniedFriend", {
+        "method" : "POST",
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "user_id" : user_id
+        })
+    })
+
+    return response.json()
+
+}
+
+async function deleteFriend(user_id) {
+    const response = await fetch("/api/local/deleteFriend", {
+        "method" : "POST",
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "user_id" : user_id
+        })
+    })
+
+    return response.json()
+}
+
