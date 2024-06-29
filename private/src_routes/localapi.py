@@ -52,6 +52,7 @@ def routes(app : Flask):
             sender_id = form.get("user_id")
 
             db.FriendRequests.drop(sender_id, receveur_id)
+            db.FriendRequests.drop(receveur_id, sender_id)
 
             return jsonify({"success" : "Friend request denied with success !"})
             

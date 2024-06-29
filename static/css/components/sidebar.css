@@ -9,6 +9,7 @@
     display: flex;
     width: calc(100% - 2 * 10px);
     max-width: 230px;
+    position: relative;
     height: 40px;
     padding: 10px;
     align-items: center;
@@ -16,6 +17,9 @@
     flex-shrink: 0;
     border-radius: 10px;
     background: var(--container);
+}
+.sidebar .div-profile-preview-cta .div-profile-status {
+    
 }
 .div-profile-picture-container {
     display: flex;

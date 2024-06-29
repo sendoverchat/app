@@ -9,6 +9,12 @@ connection_params = {
     'database': data['db_name']
 }
 
+def init():
+    with mysql.connector.connect(**connection_params) as db:
+        with db.cursor() as cursor:
+            cursor.execute("UPDATE users SET user_status = 0")
+            db.commit()
+
 class Friends:
     @staticmethod
     def getAllByUserId(user_id):
@@ -55,17 +61,17 @@ class Friends:
 
 class FriendRequests:
     @staticmethod
-    def getAllBySenderId(receveur_id):
-        with mysql.connector.connect(**connection_params) as db:
-            with db.cursor(dictionary=True) as cursor:
-                cursor.execute("SELECT * FROM friend_requests WHERE friend_receveur = %s", (receveur_id,))
-                return cursor.fetchall()
-            
-    @staticmethod
     def getAllByReceveurId(receveur_id):
         with mysql.connector.connect(**connection_params) as db:
             with db.cursor(dictionary=True) as cursor:
-                cursor.execute("SELECT * FROM friend_requests WHERE friend_receveur = %s", (receveur_id,))
+                cursor.execute("SELECT users.* FROM users INNER JOIN friend_requests ON users.user_id=friend_requests.friend_sender WHERE friend_requests.friend_receveur = %s", (receveur_id,))
+                return cursor.fetchall()
+            
+    @staticmethod
+    def getAllBySenderId(receveur_id):
+        with mysql.connector.connect(**connection_params) as db:
+            with db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT users.* FROM users INNER JOIN friend_requests ON users.user_id=friend_requests.friend_receveur WHERE friend_requests.friend_sender = %s", (receveur_id,))
                 return cursor.fetchall()
 
     @staticmethod

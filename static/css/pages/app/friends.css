@@ -69,7 +69,8 @@
 .div-pending-container {
     display: flex;
     position: relative;
-    width: 248px;
+    width: 238px;
+    padding-left: 10px;
     height: 100%;
   
     flex-direction: column;
@@ -145,6 +146,80 @@ background: var(--container);
         font-weight: 400;
         line-height: normal;
     }
+    .div-element-friend-profile svg {
+        cursor: pointer;
+    }
     .div-element-friend-profile svg path {
         stroke: var(--text);
     }
+    .div-pending-container .div-container-buttons {
+        border-radius: 10px;
+        display: flex;
+        height: 20px;
+        padding: 10px;
+        justify-content: center;
+        width: calc(100% - 20px);
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+        background: var(--container);
+    }
+    .div-container-buttons .button-button-tag {
+        border-radius: 2px;
+        display: flex;
+        padding: 4.5px 28px 3.5px 29px;
+        width: fit-content!important;
+        border: none;
+        justify-content: center;
+        color: var(--no-hover);
+        text-align: center;
+        font-family: Sora;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        align-items: center;
+        flex: 1 0 0;
+        background: var(--button);
+    }
+    .div-container-buttons .button-button-tag#add-element {
+  
+        background: var(--horty-red-500);
+        color: var(--horty-red-50);
+
+    }
+    .div-container-button-result {
+            display: flex;
+    width: 100%;
+    border-radius: 10px;
+    background: var(--container);
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    }
+.div-container-button-result .div-article-list {
+    display: flex;
+   
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: var(--container);
+    align-self: stretch;
+}
+.div-article-list .div-text-info-profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+#offline_friends, #online_friends{  
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}

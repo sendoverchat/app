@@ -20,22 +20,31 @@
             </svg>
           </div>
           <p class="p-list-friends">
-            Online friends - {{friends_status_count["online_count"]}}
+            Online friends - <span class="count_online">{{friends_status_count["online_count"]}}</span>
           </p>
-          {% for ami in friends_list %}
+          <div id="online_friends">
+            {% for ami in friends_list %}
               {% if ami["user_status"] != 0 and ami["user_status"] != 3 %}
               <div class="div-element-friend-profile">
                 <div class="div-profile-picture-container" id="{{ami["username"]}}">
                   <style>
                     #{{ami["username"]}} {
                       background: url('{{ami["avatar"]}}');
-                      background-size: cover;
-                      background-position: center;
+                      background-size: cover !important;
+                      background-position: center !important;
                     }
                   </style>
-                  <div class="div-profile-status-info">
+                  <div class="div-profile-status-info" id="{{ami["username"]}}-status">
                     <style>
-                       
+                      #{{ami["username"]}}-status {               
+                        {% if ami["user_status"] == 1 %}
+                            background: var(--fire-breeze-500);
+                        {% elif ami["user_status"] == 2 %}
+                            background: var(--horty-red-600);
+                        {% elif ami["user_status"] == 4 %}
+                            background: var(--fuwa-link-600);
+                        {% endif %}
+                      }
                     </style>
                 </div>
                 </div>
@@ -62,17 +71,154 @@
               </div>
               {% endif %}
           {% endfor %}
+          </div>
+          <p class="p-list-friends">
+            Offline friends - <span class="count_offline">{{friends_status_count["offline_count"]}}</span>
+          </p>
+          <div id="offline_friends">
+          {% for ami in friends_list %}
+            {% if ami["user_status"] == 0 or ami["user_status"] == 3 %}
+            <div class="div-element-friend-profile">
+              <div class="div-profile-picture-container" id="{{ami["username"]}}">
+                <style>
+                  #{{ami["username"]}} {
+                    background: url('{{ami["avatar"]}}');
+                    background-size: cover !important;
+                    background-position: center !important;
+                  }
+                </style>
+                <div class="div-profile-status-info" id="{{ami["username"]}}-status">
+                  <style>
+                    #{{ami["username"]}}-status {
+                      background: var(--no-hover);
+                    }
+                  </style>
+              </div>
+              </div>
+              <div class="div-text-info-profile-container">
+                <h1>{{ami["displayname"]}}</h1>
+                <p>
+              Offline
+                </p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            {% endif %}
+        {% endfor %}
+          </div>
         </div>
-        <div class="div-pending-container"></div>
+
+        <div class="div-pending-container">
+          <div class="div-container-buttons">
+            <button class="button-button-tag">Pending</button>
+            <button class="button-button-tag" id="add-element">Add</button>
+          </div>
+          <div class="div-container-button-result">
+
+              {% for pending_user in pending_by_users%}
+              <div class="div-article-list">
+                <div class="div-profile-picture-container" id="{{pending_user["username"]}}">
+                  <style>
+                    #{{pending_user["username"]}} {
+                      background: url('{{pending_user["avatar"]}}');
+                      background-size: cover !important;
+                      background-position: center !important;
+                    }
+                  </style>
+                  <div class="div-profile-status-info" id="{{pending_user["username"]}}-status">
+                    <style>
+                      #{{pending_user["username"]}}-status {    
+                        {% if pending_user["user_status"] == 0 %}      
+                          background: var(--no-hover);
+                        {% elif pending_user["user_status"] == 1 %}
+                            background: var(--fire-breeze-500);
+                        {% elif pending_user["user_status"] == 2 %}
+                            background: var(--horty-red-600);
+                        {% elif pending_user["user_status"] == 4 %}
+                            background: var(--fuwa-link-600);
+                        {% endif %}
+                      }
+                    </style>
+                </div>
+                </div>
+                <div class="div-text-info-profile-container">
+                  <h1>{{pending_user["displayname"]}}</h1>
+                  <p>
+                    {% if pending_user["user_status"] == 0 or pending_user["user_status"] == 3 %}
+                        Offline
+                    {% elif pending_user["user_status"] == 1 %}
+                        Online
+                    {% elif pending_user["user_status"] == 2 %}
+                        Do not distrub
+                    {% elif pending_user["user_status"] == 4 %}
+                        Focus
+                {% endif %}
+                  </p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M20 6L9 17L4 12"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6L18 18"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              {% endfor %}
+              {% for pending_user_author in pending_by_author%}
+              <div class="div-article-list">
+                <div class="div-profile-picture-container" id="{{pending_user_author["username"]}}">
+                  <style>
+                    #{{pending_user_author["username"]}} {
+                      background: url('{{pending_user_author["avatar"]}}');
+                      background-size: cover !important;
+                      background-position: center !important;
+                    }
+                  </style>
+                  <div class="div-profile-status-info" id="{{pending_user_author["username"]}}-status">
+                    <style>
+                      #{{pending_user_author["username"]}}-status {               
+                        {% if pending_user_author["user_status"] == 0 %}      
+                          background: var(--no-hover);
+                        {% elif pending_user_author["user_status"] == 1 %}
+                            background: var(--fire-breeze-500);
+                        {% elif pending_user_author["user_status"] == 2 %}
+                            background: var(--horty-red-600);
+                        {% elif pending_user_author["user_status"] == 4 %}
+                            background: var(--fuwa-link-600);
+                        {% endif %}
+                      }
+                    </style>
+                </div>
+                </div>
+                <div class="div-text-info-profile-container">
+                  <h1>{{pending_user_author["displayname"]}}</h1>
+                  <p>
+                  {% if pending_user_author["user_status"] == 0 or pending_user_author["user_status"] == 3 %}
+                      Offline
+                  {% elif pending_user_author["user_status"] == 1 %}
+                      Online
+                  {% elif pending_user_author["user_status"] == 2 %}
+                      Do not distrub
+                  {% elif pending_user_author["user_status"] == 4 %}
+                      Focus
+                  {% endif %}
+                  </p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M20 6L9 17L4 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              {% endfor %}
+          </div>
+        </div> 
+        
 
     </div>
-  
-    <!-- {% for ami in friends_list %}
-    <div>
-        ami de quartier :
-        {{ami["username"]}}
-    </div>
-{% endfor %} -->
 </div>
-
- 
+<script src="/static/js/friends.js"></script>

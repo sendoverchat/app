@@ -19,8 +19,22 @@ def routes(app : Flask):
             red = redirect("/app/login?return_url=/app")
             return red
         
-        red = redirect("/app/friend")
+        red = redirect("/app/friends")
         return red
+    
+    @app.route("/app/guild/<guild_id>")
+    @app.route("/app/guild/<guild_id>/")
+    def guild(guild_id):
+
+        is_token = session.get("token") != None
+        
+        if not is_token:
+            red = redirect("/app/login?return_url=/app/friends")
+            return red
+        
+        user = db.User.getByToken(session["token"])
+
+        return custom_template("pages/app/guild.html", "SendOver - XXX", "...", ["/static/css/pages/app/guild.css"], navbar_type=NavBarType.sidebar, user=user)
 
     @app.route("/app/friend")
     @app.route("/app/friend/")
