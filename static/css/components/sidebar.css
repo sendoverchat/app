@@ -17,7 +17,7 @@
     border-radius: 10px;
     background: var(--container);
 }
-.div-profile-preview-cta .div-profile-picture-container {
+.div-profile-picture-container {
     display: flex;
     width: 38px;
     height: 38px;
@@ -30,7 +30,7 @@
     border-radius: 50%;
 
 }
-.div-profile-preview-cta .div-profile-picture-container .div-profile-status-info {
+.div-profile-picture-container .div-profile-status-info {
     width: 9.6px;
     height: 9.6px;
     border: 1px solid var(--container);
