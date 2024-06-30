@@ -56,6 +56,19 @@
     align-self: stretch;
     min-height: calc(100vh - 150px);
 }
+@media screen and (max-width: 800px) {
+.div-container-friends {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    }
+    .div-pending-container,
+    .div-all-friends-container {
+        width: 100%!important;
+        padding-left: 0!important;
+    }
+}
 .div-all-friends-container {
     display: flex;
     flex-direction: column;
@@ -75,7 +88,7 @@
   
     flex-direction: column;
     align-items: flex-start;
-    gap: 35px;
+    gap: 70px;
 }
 .div-search-bar-container {
     display: flex;
@@ -95,7 +108,7 @@ background: var(--container);
     font-family: Sora;
     font-size: 12px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     background-color: var(--container);
     line-height: normal;
 
@@ -150,6 +163,9 @@ background: var(--container);
         cursor: pointer;
     }
     .div-element-friend-profile svg path {
+        stroke: var(--no-hover);
+    }
+    .div-element-friend-profile svg:hover path {
         stroke: var(--text);
     }
     .div-pending-container .div-container-buttons {
@@ -192,7 +208,7 @@ background: var(--container);
             display: flex;
     width: 100%;
     border-radius: 10px;
-    background: var(--container);
+
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -202,6 +218,8 @@ background: var(--container);
    
     align-items: center;
     gap: 10px;
+    width: calc(100% - 20px);
+    padding: 10px;
     border-radius: 10px;
     background: var(--container);
     align-self: stretch;
@@ -215,6 +233,15 @@ background: var(--container);
     flex: 1 0 0;
     align-self: stretch;
 }
+.div-article-list svg  {
+    cursor: pointer;
+}
+.div-article-list svg path {
+    stroke: var(--no-hover);
+}
+.div-article-list svg:hover path {
+    stroke: var(--text);
+}
 #offline_friends, #online_friends{  
   display: flex;
   flex-direction: column;
@@ -222,4 +249,107 @@ background: var(--container);
   align-items: flex-start;
   gap: 10px;
   width: 100%;
+}
+.div-container-button-result .div-nothing-request {
+    height: 134px;
+    align-self: stretch;
+    position: relative;
+    width: 100%;
+}
+.div-nothing-request h1 {
+    color: var(--no-hover);
+text-align: center;
+font-family: Sora;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.div-nothing-request svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.div-nothing-request #path-eye-anim {
+    animation: eye infinite 1s ease-out alternate;
+}
+@keyframes eye {
+    0% {
+        transform: translateY(-3px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+#svg-z-anim {
+    margin-left: 58px;
+    margin-top: -18px;
+    z-index: -1;
+    animation: z-opacity infinite 5s linear;
+}
+@keyframes z-opacity {
+    0% {
+        margin-top: -10px;
+        margin-left: 35px;
+        opacity: 0;
+    }
+    25% {
+        margin-top: -18px;
+        margin-left: 58px;
+        opacity: 0.5;
+    }
+    50% {
+        margin-top: -25px;
+        margin-left: 68px;
+        opacity: 0;
+    }
+    51% {
+        margin-top: -5px;
+        margin-left: 25px;
+        opacity: 0;
+    }
+}
+.div-container-button-result input {
+    padding: 10px;
+
+    border-radius: 10px;
+    background-color: var(--container);
+    width: 75%;
+    vertical-align: top;
+    border: none;
+    outline: none;
+    color: var(--no-hover);
+    font-family: Sora;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: var(--container);
+    line-height: normal;
+}
+.div-container-button-result button {
+    padding: 10px;
+    height: 35px;
+    width: 35px;
+    vertical-align: top;
+    border-radius: 10px;
+    background-color: var(--container);
+    border: none;
+    outline: none;
+    color: var(--no-hover);
+    font-family: Sora;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: var(--container);
+    line-height: normal;
+}
+.div-container-button-result button svg {
+    left: 50%;
+    position: relative;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.div-container-button-result button svg path {
+    stroke: var(--no-hover);
 }

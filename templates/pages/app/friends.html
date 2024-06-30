@@ -117,13 +117,28 @@
 
         <div class="div-pending-container">
           <div class="div-container-buttons">
-            <button class="button-button-tag">Pending</button>
+            <button class="button-button-tag" id="pending-element">Pending</button>
             <button class="button-button-tag" id="add-element">Add</button>
           </div>
-          <div class="div-container-button-result">
-
+          <div class="div-container-button-result" id="viewfriendrequestdivresult">
+              {% if pending_by_users|length == 0 and pending_by_author|length == 0 %}
+              <div class="div-nothing-request">
+                <h1>No friend request for the moment</h1>
+                <svg xmlns="http://www.w3.org/2000/svg" width="73" height="67" viewBox="0 0 73 67" fill="none">
+                  <path d="M38.2963 1.0022C67.2027 0.559341 98.1737 67.2494 35.4234 65.9822C-27.3269 64.715 9.39001 1.44505 38.2963 1.0022Z" fill="var(--background)" stroke="var(--no-hover)" stroke-width="2"/>
+                  <path d="M15.1277 50.1263C4.1295 40.9908 13.9996 15.5 13.9996 15.5C13.9996 15.5 5.25143 24 2.49909 37C0.999307 45.4968 2.99879 49.497 5.4967 54.4944L5.49952 54.5C13 61.5 15.7603 62.7717 28.5 64.5C46 66.5 51.2578 64.0102 57.5 61.5C63.7422 58.9898 67 54 67 54C67 54 26.1259 59.2618 15.1277 50.1263Z" fill="var(--no-hover)"/>
+                  <path id="path-eye-anim" d="M58 33.726C58 37.6097 56.433 39 54.5 39C52.567 39 51 37.6097 51 33.726C51 29.8423 52.567 33.7262 54.5 33.7262C56.433 33.7262 58 29.8423 58 33.726Z" fill="var(--no-hover)"/>
+                  <path id="path-eye-anim" d="M32 33.7279C32 37.6102 30.6569 39 29 39C27.3431 39 26 37.6102 26 33.7279C26 29.8456 27.3431 33.7186 29 33.7186C30.6569 33.7186 32 29.8456 32 33.7279Z" fill="var(--no-hover)"/>
+                  <ellipse cx="47.5559" cy="9.04342" rx="4.3608" ry="1.98988" transform="rotate(21.77 47.5559 9.04342)" fill="var(--container)"/>
+                </svg>
+                <svg id="svg-z-anim" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                  <path d="M16 30H0V28.2537L12.8489 13.8806V13.7463H0.434635V12H15.674V13.7463L2.6893 28.1194V28.2537H16V30Z" fill="#80848E"/>
+                  <path d="M30 14H18V12.6418L27.6367 1.46269V1.35821H18.326V0H29.7555V1.35821L20.017 12.5373V12.6418H30V14Z" fill="#80848E"/>
+                </svg>
+              </div>
+              {% endif %}
               {% for pending_user in pending_by_users%}
-              <div class="div-article-list">
+              <div class="div-article-list" id="user_{{pending_user["user_id"]}}">
                 <div class="div-profile-picture-container" id="{{pending_user["username"]}}">
                   <style>
                     #{{pending_user["username"]}} {
@@ -162,16 +177,16 @@
                 {% endif %}
                   </p>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <svg class="svg-accept-request-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M20 6L9 17L4 12"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <svg class="svg-deny-request-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M18 6L6 18M6 6L18 18"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
               {% endfor %}
               {% for pending_user_author in pending_by_author%}
-              <div class="div-article-list">
+              <div class="div-article-list" id="user_{{pending_user_author["user_id"]}}">
                 <div class="div-profile-picture-container" id="{{pending_user_author["username"]}}">
                   <style>
                     #{{pending_user_author["username"]}} {
@@ -210,13 +225,19 @@
                   {% endif %}
                   </p>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M20 6L9 17L4 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="svg-deny-request-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6L18 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
               {% endfor %}
           </div>
-        </div> 
+          <div class="div-container-button-result" id="addfrienddivresult" style="display: none;">
+            <input type="text" placeholder="username" id="addfriendinput"> <button id="addfriendbutton"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H6C4.93913 15 3.92172 15.4214 3.17157 16.1716C2.42143 16.9217 2 17.9391 2 19V21M19 8V14M22 11H16M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg></button>
+            <div id="addfrienderrormessage"></div>
+          </div>
+        </div>
         
 
     </div>

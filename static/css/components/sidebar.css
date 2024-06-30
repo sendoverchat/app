@@ -18,9 +18,7 @@
     border-radius: 10px;
     background: var(--container);
 }
-.sidebar .div-profile-preview-cta .div-profile-status {
-    
-}
+
 .div-profile-picture-container {
     display: flex;
     width: 38px;
@@ -80,6 +78,7 @@
     stroke: var(--text);
     transition: 0.3s ease-out;
 }
+@media screen and (min-width: 400px) {
 .sidebar .div-guild-list-container {
     border-radius: 10px;
     background: var(--container);
@@ -91,7 +90,7 @@
     overflow: hidden;
     overflow-x: scroll;
     flex: 1 0 0;
-}
+}}
 
 .div-guild-list-container{
     scrollbar-width: none;
@@ -155,4 +154,24 @@
 }
 .div-guild-list-container .div-element-guild-cta .div-guild-picture svg path {
     stroke: var(--text);
+}
+@media screen and (min-width: 400px) {
+    #burger-svg-btn {
+        display: none;
+    }
+   
+}
+@media screen and (max-width: 400px) {
+.div-guild-list-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    z-index: 99;
+    transform: translateX(60px);
+    width: 60px;
+    background-color: var(--container);
+}
 }
